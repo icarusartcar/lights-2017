@@ -53,7 +53,8 @@ this one just blinks a light, hello-arduino-style.   Open the directory, compile
 ### unicorn_puke
 
 This is one of the patterns from the FastLED demo loop, modified to
-run on our rig with APA102 and level shifter.
+run on our rig with APA102 and level shifter.  To build this you have
+to...
 
 #### Add the FastLED library
 
@@ -70,16 +71,14 @@ note: #pragma message: FastLED version 3.001.003
                      ^
 ```
 
-Which is a pretty spectacularly annoying thing.  Trigger something
-that looks like a compiler warning to tell me something I already
-knew?  Arduino-weenies.  You'll also see
+Which is the world's most useless use of a #pragma message as far as I can tell. You'll also see
 
 ```
  #      pragma message "No hardware SPI pins defined.  All SPI access will default to bitbanged output"
                        ^
 ```
 
-which is also safe to ignore.
+which isn't much better, and also safe to ignore.
 
 Upload the sketch and you'll see unicorn puke over 200 leds.
 
