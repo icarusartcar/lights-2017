@@ -82,7 +82,7 @@ which isn't much better, and also safe to ignore.
 
 Upload the sketch and you'll see unicorn puke over 200 leds.
 
-### blifnars
+# teh blifnars
 
 This is the whole-enchilada version with webserver and opc mode.  Get
 it built and flashed... by default you'll see the unicorn puke mode.
@@ -108,3 +108,7 @@ http:/192.168.1.177/set?relaya_state=1
 
 which is what we used to toggle the big white engine lights on and
 off.
+
+For more details, just read the codes.  Just kidding, let's see how
+this goes and once you can tweak the code and flash the chips
+yourselves, we can unpack how the OPC stuff works, etc.
