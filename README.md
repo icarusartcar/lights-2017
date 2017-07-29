@@ -24,12 +24,14 @@ way, great.
 *NOTE* that you have to cast some magic before the esp is ready to
 flash, it won't automatically realize that you're trying to flash it and accept what your're sending:  you'll see
 
+```
   warning: espcomm_sync failed
   error: espcomm_open failed
   error: espcomm_upload_mem failed
   error: espcomm_upload_mem failed
+```
 
-Now the magic: press and hold the ``GPIO0`` button, press and release
-``RESET`` button, then release ``GPIO0`` button.  a red light will
+Now the magic: press and hold the `GPIO0` button, press and release
+`RESET` button, then release `GPIO0` button.  a red light will
 stay on on the chip.  then you can upload to the board, blue light
 will flicker while the upload is happening.
