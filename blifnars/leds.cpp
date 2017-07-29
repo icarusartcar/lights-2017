@@ -132,6 +132,10 @@ std::map<std::string, std::shared_ptr<run_mode>> modemap;
 std::shared_ptr<run_mode> current_mode;
 
 void led_init() {
+  // TODO: this should be runtime-configurable to support either three
+  // wire or four-wire strips.
+
+  // four wire version
   FastLED.addLeds<APA102, DATA_PIN, CLOCK_PIN, BGR>(leds, opc_channels.get() * pixels_per_channel.get())
       .setCorrection(TypicalLEDStrip);
 

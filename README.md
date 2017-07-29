@@ -36,6 +36,14 @@ Now the magic: press and hold the `GPIO0` button, press and release
 stay on on the chip.  then you can upload to the board, blue light
 will flicker while the upload is happening.
 
+## Teh Hardwares
+
+Where we talk to APA102 LEDs, We use an esp8266 chip on a board with a
+SN74ATH125 level-shifter chip.  This is because the logic output of
+the esp is at 3.3V and the LEDs need to see 5V to work correctly.  Be
+sure you have one of these little boardlets that we mount inside
+weatherproof monoprice boxes.
+
 ## Teh Codes
 
 Go to https://github.com/icarusartcar/lights-2017 (where you may be
@@ -46,9 +54,15 @@ In the toplevel directory of the checkout there are several
 directories.  Each is an arduino "sketch" that you can open with the
 idea, buiild and upload to the chip.
 
+
+
+
 ### hello_world
 
-this one just blinks a light, hello-arduino-style.   Open the directory, compile, upload, blue light blinks.
+This one just blinks a light, hello-arduino-style.  Open the
+directory, compile, upload, blue light blinks.  Should run the same on
+an actual arduino... this verifies that the toolchain is working
+correctly.
 
 ### unicorn_puke
 
@@ -92,23 +106,59 @@ If the chip is new to the router, you won't know what IP address it
 got.  Go to the router's DHCP client table and have a look.  The rouer
 should be configured icarus/outerspace for administration.
 
-Once you've found this, hit the IP address of the chip with,
-e.g. 'curl', you'll see a little status printout.  The most important
-two commands are probably
+Note the mac address of the chip, (it is not printed on the chip),
+give it a descriptive name, add the mac-to-ip-and-hostname mapping to
+the static DHCP table.  This way you can refer to the chip by its
+hostname when you work with it.  Here we'll use "dancebox".
+
+When you've done this, reset the chip.  It should very quickly connect
+to the router and get an IP, and be "ping" able and so forth.
+
+You should be able to hit it with a browser, but `curl` gives me fewer
+problems as it doesn't cache pages or DNS information, etc.:
+
+```
+http://dancebox
+```
+
+this should show you a little status page.   If you see it good.
+
+You can set variables with an HTTP GET:
+
+```
+http://dancebox/set?relaya_state=1
+```
+
+note that your shell might see the question mark as a wildcard and
+require you to quote the whole url or escape the character.  So if you
+get an error figure out if it is curl or it is your shell that is
+complaining.
+
+The other important command is the led-mode switch, for instance for
+'dots' mode:
+
+```
+http://192.168.1.177/setmode?mode=dots
+```
+
+try `unicorn_puke`, `cops`, `dots`, and search the code for these
+strings to see how these modes are registered and switched to.
+
+If you set `opc_mode`,
 
 ```
 http://192.168.1.177/setmode?mode=opc_mode
 ```
 
-and
+the strip will go black and the chip will start listening on port
+`7890` (standard for opc), and set led colors based on the messages it
+receives.  At this point you can send it some stuff.
 
-```
-http:/192.168.1.177/set?relaya_state=1
-```
+# Open Pixel Control
 
-which is what we used to toggle the big white engine lights on and
-off.
+To be written:
 
-For more details, just read the codes.  Just kidding, let's see how
-this goes and once you can tweak the code and flash the chips
-yourselves, we can unpack how the OPC stuff works, etc.
+* sample opc python script that does the blinky
+* esp8266 TCP stack limitations
+* how to break a megastrip up in to opc channels so as not to
+  encounter those limitations
