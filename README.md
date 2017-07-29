@@ -35,3 +35,55 @@ Now the magic: press and hold the `GPIO0` button, press and release
 `RESET` button, then release `GPIO0` button.  a red light will
 stay on on the chip.  then you can upload to the board, blue light
 will flicker while the upload is happening.
+
+## Teh Codes
+
+Go to https://github.com/icarusartcar/lights-2017 (where you may be
+reading this) and learn to use git in order to get the code.
+Hopefully you know git already, otherwise... block out some time.
+
+In the toplevel directory of the checkout there are several
+directories.  Each is an arduino "sketch" that you can open with the
+idea, buiild and upload to the chip.
+
+### hello_world
+
+this one just blinks a light, hello-arduino-style.   Open the directory, compile, upload, blue light blinks.
+
+### unicorn_puke
+
+This is one of the patterns from the FastLED demo loop, modified to
+run on our rig with APA102 and level shifter.
+
+#### Add the FastLED library
+
+Click `Sketch -> Include Library -> Manage Libraries` search for
+*FastLED*, add the latest version which right now looks like 3.1.3.
+
+#### Compile and Upload Sketch
+
+When you compile you'll see
+
+```
+note: #pragma message: FastLED version 3.001.003
+ #    pragma message "FastLED version 3.001.003"
+                     ^
+```
+
+Which is a pretty spectacularly annoying thing.  Trigger something
+that looks like a compiler warning to tell me something I already
+knew?  Arduino-weenies.  You'll also see
+
+```
+ #      pragma message "No hardware SPI pins defined.  All SPI access will default to bitbanged output"
+                       ^
+```
+
+which is also safe to ignore.
+
+Upload the sketch and you'll see unicorn puke over 200 leds.
+
+### blifnars
+
+This is the whole-enchilada version with webserver and opc mode.  Get
+it built and flashed... by default you'll see the unicorn puke mode.
