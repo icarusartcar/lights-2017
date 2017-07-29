@@ -86,3 +86,25 @@ Upload the sketch and you'll see unicorn puke over 200 leds.
 
 This is the whole-enchilada version with webserver and opc mode.  Get
 it built and flashed... by default you'll see the unicorn puke mode.
+
+By default the chip will try to connect to ssid outerspace/outerspace.
+If the chip is new to the router, you won't know what IP address it
+got.  Go to the router's DHCP client table and have a look.  The rouer
+should be configured icarus/outerspace for administration.
+
+Once you've found this, hit the IP address of the chip with,
+e.g. 'curl', you'll see a little status printout.  The most important
+two commands are probably
+
+```
+http://192.168.1.177/setmode?mode=opc_mode
+```
+
+and
+
+```
+http:/192.168.1.177/set?relaya_state=1
+```
+
+which is what we used to toggle the big white engine lights on and
+off.
