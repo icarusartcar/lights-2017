@@ -161,3 +161,12 @@ To be written:
 * esp8266 TCP stack limitations
 * how to break a megastrip up in to opc channels so as not to
   encounter those limitations
+
+# WIRING
+
+The color scheme for the four-wire (APA102) lights is:
+
+- *BLUE* or *BLACK* Negative
+- *RED*  +5V
+- *GREEN* Data (esp pin 13)
+- *YELLOW* Clock (esp pin 14)
