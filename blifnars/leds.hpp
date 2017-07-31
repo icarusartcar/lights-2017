@@ -18,8 +18,8 @@ const unsigned int MAX_LEDS_PER_OCP_CHANNEL = 484;
 const unsigned int MAX_LEDS = MAX_OCP_CHANNELS * MAX_LEDS_PER_OCP_CHANNEL;
 alignas(32) extern CRGB leds[MAX_LEDS];
 
-const unsigned int DATA_PIN=13;
-const unsigned int CLOCK_PIN=14;
+const uint8_t DATA_PIN=13;
+const uint8_t CLOCK_PIN=14;
 
 struct run_mode {
   virtual void enter_impl();

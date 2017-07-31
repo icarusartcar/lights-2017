@@ -136,8 +136,15 @@ void led_init() {
   // wire or four-wire strips.
 
   // four wire version
-  FastLED.addLeds<APA102, DATA_PIN, CLOCK_PIN, BGR>(leds, opc_channels.get() * pixels_per_channel.get())
+  if (threewire.get() == 0) {
+    FastLED.addLeds<WS2811, LEDA_PIN, GRB>(leds, opc_channels.get() * pixels_per_channel.get())
       .setCorrection(TypicalLEDStrip);
+    FastLED.addLeds<WS2811, LEDB_PIN, GRB>(leds, opc_channels.get() * pixels_per_channel.get())
+      .setCorrection(TypicalLEDStrip);
+  } else {
+    FastLED.addLeds<APA102, DATA_PIN, CLOCK_PIN, BGR>(leds, opc_channels.get() * pixels_per_channel.get())
+      .setCorrection(TypicalLEDStrip);
+  }
 
   modemap["soothe"] = make_shared<soothe_mode>();
   modemap["heartbeat"] = make_shared<heartbeat_mode>();

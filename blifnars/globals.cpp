@@ -4,6 +4,7 @@
 #include "icarus.hpp"
 #include "globals.hpp"
 
+parameter<uint8_t> threewire("threewire", 0);
 parameter<uint8_t> brightness("brightness", 255);
 parameter<uint8_t> opc_channels("opc_channels", 5);
 parameter<uint16_t> pixels_per_channel("pixels_per_channel", 484);
@@ -16,6 +17,7 @@ std::set<parameter_base*> parameters;
 
 
 void register_globals() {
+  parameters.insert(&threewire);
   parameters.insert(&brightness);
   parameters.insert(&opc_channels);
   parameters.insert(&pixels_per_channel);

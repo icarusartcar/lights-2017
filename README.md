@@ -1,5 +1,3 @@
-
-
 # Preliminaries
 
 ## Arduino
@@ -43,6 +41,7 @@ SN74ATH125 level-shifter chip.  This is because the logic output of
 the esp is at 3.3V and the LEDs need to see 5V to work correctly.  Be
 sure you have one of these little boardlets that we mount inside
 weatherproof monoprice boxes.
+
 
 ## Teh Codes
 

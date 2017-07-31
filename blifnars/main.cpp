@@ -98,7 +98,12 @@ void handleSet() {
     ssid.store();
   }
 
-  if (server.hasArg("ocp_channels")) {
+  if (server.hasArg("threewire")) {
+    threewire.set(server.arg("threewire"));
+    threewire.store();
+  }
+
+  if (server.hasArg("opc_channels")) {
     opc_channels.set(server.arg("opc_channels"));
     opc_channels.store();
   }
