@@ -170,3 +170,10 @@ The color scheme for the four-wire (APA102) lights is:
 - *RED*  +5V
 - *GREEN* Data (esp pin 13)
 - *YELLOW* Clock (esp pin 14)
+
+For the three-wire verson (WS2812, etc), there is only one data wire.
+The same signal appears on pins 4 and 5 (this is for legacy reasons,
+the engines have two separate strips, one per engine).
+
+See also the (schematic)[esp-102-board.pdf] which Alex wired up in to
+a bunch of nice carrier circuit boards with chip slots on them.

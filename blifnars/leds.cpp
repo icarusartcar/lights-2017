@@ -136,10 +136,10 @@ void led_init() {
   // wire or four-wire strips.
 
   // four wire version
-  if (threewire.get() == 0) {
-    FastLED.addLeds<WS2811, LEDA_PIN, GRB>(leds, opc_channels.get() * pixels_per_channel.get())
+  if (threewire.get() == 1) {
+    FastLED.addLeds<WS2811, LEDA_PIN, BGR>(leds, opc_channels.get() * pixels_per_channel.get())
       .setCorrection(TypicalLEDStrip);
-    FastLED.addLeds<WS2811, LEDB_PIN, GRB>(leds, opc_channels.get() * pixels_per_channel.get())
+    FastLED.addLeds<WS2811, LEDB_PIN, BGR>(leds, opc_channels.get() * pixels_per_channel.get())
       .setCorrection(TypicalLEDStrip);
   } else {
     FastLED.addLeds<APA102, DATA_PIN, CLOCK_PIN, BGR>(leds, opc_channels.get() * pixels_per_channel.get())
