@@ -180,4 +180,4 @@ a bunch of nice carrier circuit boards with chip slots on them.
 
 # Layout
 
-See [this drawing]https://docs.google.com/presentation/d/1Q3GUXYw7O6g-MaX_bUjvAZeW4y2AVj7UUPZTMnNdVTc/edit?ts=59802e85#slide=id.p) and [panel nujmbering scheme diagram](armor-panel-layout.pdf) and (the list of individual lengths of extrusion)[https://docs.google.com/spreadsheets/d/1nKBX3UcNEjuj8a5V4r_o6Spt-JAw5rRQW77RWwrKLbo/edit?ts=59802e16#gid=270346701]
+See [this drawing](https://docs.google.com/presentation/d/1Q3GUXYw7O6g-MaX_bUjvAZeW4y2AVj7UUPZTMnNdVTc/edit?ts=59802e85#slide=id.p) and [panel nujmbering scheme diagram](armor-panel-layout.pdf) and (the list of individual lengths of extrusion)[https://docs.google.com/spreadsheets/d/1nKBX3UcNEjuj8a5V4r_o6Spt-JAw5rRQW77RWwrKLbo/edit?ts=59802e16#gid=270346701]
