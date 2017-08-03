@@ -9,9 +9,10 @@ parameter<uint8_t> brightness("brightness", 255);
 parameter<uint8_t> opc_channels("opc_channels", 5);
 parameter<uint16_t> pixels_per_channel("pixels_per_channel", 484);
 parameter<std::string> loghost("loghost", "loghost");
-parameter<std::string> hostnamep("hostname", "dummy-hostname");
+parameter<std::string> hostnamep("hostname", "default-hostname");
 parameter<std::string> ssid("ssid", "outerspace");
 parameter<std::string> password("password", "outerspace");
+parameter<std::string> mode("mode", "unicorn_puke");
 
 std::set<parameter_base*> parameters;
 
@@ -25,6 +26,7 @@ void register_globals() {
   parameters.insert(&hostnamep);
   parameters.insert(&ssid);
   parameters.insert(&password);
+  parameters.insert(&mode);
 
   for (auto& p : parameters) {
     p->load();

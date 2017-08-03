@@ -67,17 +67,17 @@ void handleRoot() {
 void handleSetMode() {
   iclog("handleSetMode");
   bool success = false;
-  if (server.hasArg("mode")) {
-    parameter<std::string> pi;
-    std::string newmode;
-    pi.set(server.arg("mode"));
-    newmode = pi;
-    success = led_switch(newmode);
-  }
-  if (success)
+
+  std::string newmode = server.arg("mode").c_str();
+
+  iclog("trying to set mode '%s'", newmode.c_str());
+  success = led_switch(newmode);
+
+  if (success) {
     server.send(200, "text/plain", "ok\n");
-  else
+  } else {
     server.send(501, "text/plain", "not implemented\n");
+  }
 }
 
 void handleSet() {
@@ -132,6 +132,12 @@ void handleSet() {
     relayb_state = server.arg("relayb_state").toInt();
     digitalWrite(RELAYB_PIN, relayb_state == 0 ? LOW : HIGH);
   }
+
+  if (server.hasArg("mode")) {
+    handleSetMode();
+    return;
+  }
+
   handleRoot();
 }
 
@@ -220,7 +226,7 @@ void setup_impl(void) {
   register_globals();
 
   led_init();
-  led_switch("unicorn_puke");
+  led_switch(mode);
 
   iclog("getting ready to check wifi");
   check_wifi();
@@ -228,7 +234,6 @@ void setup_impl(void) {
   iclog("BOOTED %s", version.c_str());
 
   server.on("/", HTTP_GET, handleRoot);
-  server.on("/setmode", HTTP_GET, handleSetMode);
   server.on("/set", HTTP_GET, handleSet);
   server.on("/reset", HTTP_GET, handleReset);
 
@@ -240,6 +245,7 @@ void setup_impl(void) {
   ota_setup();
 
   statusblink(10, CRGB::Green, 255);
+
 }
 
 void flash_red() {
@@ -263,9 +269,9 @@ void check_wifi() {
   iclog("Using hostname %s", hostnamep.c_str());
   WiFi.mode(WIFI_STA);  // or WIFI_AP or WIFI_AP_STA
   iclog("WIFITIME");
-  // WiFi.hostname(hostnamep.c_str());
+  WiFi.hostname(hostnamep.c_str());
 
-  WiFi.setPhyMode(WIFI_PHY_MODE_11G);
+  WiFi.setPhyMode(WIFI_PHY_MODE_11N);
   WiFi.setSleepMode(WIFI_NONE_SLEEP);
   WiFi.mode(WIFI_STA);
 
@@ -278,8 +284,6 @@ void check_wifi() {
   static const char* station_status_str[] = {
       "STATION_IDLE",        "STATION_CONNECTING",   "STATION_WRONG_PASSWORD",
       "STATION_NO_AP_FOUND", "STATION_CONNECT_FAIL", "STATION_GOT_IP"};
-
-  led_switch("unicorn_puke");
 
   while (WiFi.status() != WL_CONNECTED) {
     wetried = true;

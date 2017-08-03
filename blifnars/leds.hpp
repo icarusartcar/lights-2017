@@ -22,6 +22,7 @@ const uint8_t DATA_PIN=13;
 const uint8_t CLOCK_PIN=14;
 
 struct run_mode {
+  int N;
   virtual void enter_impl();
   virtual void leave_impl();
   virtual int run_impl() = 0;

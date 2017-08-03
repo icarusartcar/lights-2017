@@ -18,13 +18,13 @@ class parameter : public parameter_base {
   struct stringize_visitor {
     std::string operator()(std::string s) { return s; }
     std::string operator()(uint8_t uc) {
-      char buf[255];
-      snprintf(buf, 255, "%u", uc);
+      char buf[256];
+      snprintf(buf, 256, "%u", uc);
       return std::string(buf);
     }
     std::string operator()(uint16_t uc) {
-      char buf[255];
-      snprintf(buf, 255, "%u", uc);
+      char buf[256];
+      snprintf(buf, 256, "%u", uc);
       return std::string(buf);
     }
   };
@@ -87,14 +87,6 @@ public:
     return pretty_.c_str();
   }
 
-  /*
-  template <typename U>
-  const char* c_str_dispatch(const U&, std::false_type) const
-  {
-    static_assert(0, "you can't c_str() this type");
-    return 0;
-  }
-  */
   template <typename U>
   const char* c_str_dispatch(const U& s,
                              typename std::enable_if<std::is_same<U, std::string>::value>::type* t = 0) const
@@ -120,14 +112,14 @@ public:
   int read(File& f, std::string& s)
   {
     // if our file is too small (type size has changed), then just use default
-    if(f.size() != 255)
+    if(f.size() != 256)
       return -1;
 
-    char buf[255];
-    memset(buf, 0, 255);
+    char buf[256];
+    memset(buf, 0, 256);
 
-    iclog("reading %u bytes", 255);
-    int b = f.read(reinterpret_cast<uint8_t*>(&buf), 255);
+    iclog("reading %u bytes", 256);
+    int b = f.read(reinterpret_cast<uint8_t*>(&buf), 256);
     s = buf;
     return b;
   }
@@ -156,7 +148,13 @@ public:
 
   int write(File& f, const std::string& u)
   {
-    return f.write(reinterpret_cast<const uint8_t*>(u.c_str()), u.size());
+    int prepad = f.write(reinterpret_cast<const uint8_t*>(u.c_str()), u.size());
+    iclog("wrote %d bytes prepad");
+    // pad it out to 256
+    uint8_t zerobyte = 0;
+    for (int j=0; j<256-prepad; ++j)
+      f.write(&zerobyte, 1);
+    return 256;
   }
 
   void store() {

@@ -62,9 +62,9 @@ String fs_retrieve<String>(String name, String defvalue)
   }
 
   File f = SPIFFS.open(name, "r");
-  char buf[255];
-  memset(buf, 0, 255);
-  int b = f.read(reinterpret_cast<uint8_t*>(&buf), 255);
+  char buf[256];
+  memset(buf, 0, 256);
+  int b = f.read(reinterpret_cast<uint8_t*>(&buf), 256);
   iclog("%s was %d bytes on disk\n", name.c_str(), b);
   String s(buf);
   f.close();

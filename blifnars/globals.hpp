@@ -13,6 +13,7 @@ extern parameter<std::string> loghost;
 extern parameter<std::string> hostnamep;
 extern parameter<std::string> ssid;
 extern parameter<std::string> password;
+extern parameter<std::string> mode;
 
 extern std::set<parameter_base*> parameters;
 
