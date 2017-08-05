@@ -14,13 +14,23 @@
 
 FASTLED_USING_NAMESPACE
 
+
 alignas(32) CRGB leds[MAX_LEDS];
 
 using namespace std;
 
+//** run_mode
+// Interface for structs that display a mode.
+// Extend and impliment the enter_impl() and leave_imp() 
+// functions in order to jive with the leds
+
 void run_mode::enter_impl() { }
 void run_mode::leave_impl() { }
 
+
+
+// root level entrance function
+// Gets the number of leds from channels * pixels per then calls imp
 void run_mode::enter() {
   N = opc_channels.get() * pixels_per_channel.get();
   FastLED.setBrightness(brightness);
@@ -59,6 +69,8 @@ struct heartbeat_mode : run_mode {
     return 1;
   }
 };
+
+
 
 struct unicorn_puke_mode : run_mode {
   ~unicorn_puke_mode() = default;
