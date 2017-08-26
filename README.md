@@ -137,7 +137,7 @@ The other important command is the led-mode switch, for instance for
 'dots' mode:
 
 ```
-http://192.168.1.177/setmode?mode=dots
+http://192.168.1.177/set?mode=dots
 ```
 
 try `unicorn_puke`, `cops`, `dots`, and search the code for these
@@ -146,12 +146,29 @@ strings to see how these modes are registered and switched to.
 If you set `opc_mode`,
 
 ```
-http://192.168.1.177/setmode?mode=opc_mode
+http://192.168.1.177/set?mode=opc_mode
 ```
 
 the strip will go black and the chip will start listening on port
 `7890` (standard for opc), and set led colors based on the messages it
 receives.  At this point you can send it some stuff.
+
+# Setting up/Changing the Number of LEDS
+
+* The maximum number of LEDs per channel is around 484. In order to set the number of LEDs per channel, call 
+
+```
+/set?pixels_per_channel=<NUM_LEDS>
+```
+
+To set the number of channels, call
+
+```
+/set?opc_channels=<NUM_CHANNELS>
+```
+
+This wortks for both OPC and non-OPC modes. Care for setting pixels per channel over 484, it may freeze subsequent channels. (Bug we may get to).
+
 
 # Open Pixel Control
 
