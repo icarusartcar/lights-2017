@@ -1,5 +1,14 @@
 # Preliminaries
 
+## Installation
+
+1. Download and install https://www.arduino.cc/en/Main/Software
+2. Open Arduino IDE, click Arduino->Preferences->Additional Board Managers URL-> Add http://arduino.esp8266.com/stable/package_esp8266com_index.json 
+3. Click Tools -> Boards Manager -> Search For ESP8266 -> Install
+4. Click Tools -> Boards Manager -> Select Generic ESP8266
+5. Click Sketch -> Include Library -> Manage Libraries, search for FastLED, add the project's version of 3.1.3.
+6. Clone the repo
+
 ## Arduino
 
 Get the arduino ide from https://www.arduino.cc/en/Main/Software
